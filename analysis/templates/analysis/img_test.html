@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>이미지 인식 테스트 페이지</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <div id="content" class="container mt-5">
+    <form method="post" id="form1" name="form1" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>
+            <p>
+                <label for="file1">상품이미지</label>
+                <input name="file1" type="file" id="file1">
+            </p>
+            <p>
+                <input type="button" id="wrtBtn" value="등록">
+            </p>
+        </fieldset>
+    </form>
+</div>
+</body>
+<script>
+    $(function (){
+        $('#wrtBtn').click(function() {
+            document.form1.action='test_analysis';
+            document.form1.submit();
+        })
+    })
+</script>
+</html>
