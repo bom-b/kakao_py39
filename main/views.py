@@ -15,12 +15,10 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def communication_test(request):
-    # try:
-    #     load_json = json.loads(request.body.decode('utf8'))
-    #     logger.debug(str(load_json))
-    # except json.JSONDecodeError as e:
-    #     logger.error("Invalid JSON format: %s", e)
-    #     return JsonResponse({"error": "Invalid JSON format"}, status=400)
+    load_json = json.loads(request.body.decode('utf8'))
+    # print(str(load_json))
+    plusfriend_user_key = load_json.get('userRequest', {}).get('user', {}).get('properties', {}).get(
+        'plusfriend_user_key', None)
 
     return JsonResponse({
         "version": "2.0",
@@ -28,7 +26,7 @@ def communication_test(request):
             "outputs": [
                 {
                     "simpleText": {
-                        "text": "간단한 텍스트 요소입니다."
+                        "text": f"서버 연결 상태: 정상 \n접속 유저 : {plusfriend_user_key}"
                     }
                 }
             ]
