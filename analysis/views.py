@@ -69,7 +69,7 @@ def analysis_picture(request):
 
     return JsonResponse({
         "version": "2.0",
-        "template": {
+        "templates": {
             "outputs": [
                 {
                     "basicCard": {

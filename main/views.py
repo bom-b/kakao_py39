@@ -25,7 +25,7 @@ def communication_test(request):
 
     return JsonResponse({
         "version": "2.0",
-        "template": {
+        "templates": {
             "outputs": [
                 {
                     "simpleText": {
