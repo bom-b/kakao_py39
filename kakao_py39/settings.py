@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import json
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from django.core.exceptions import ImproperlyConfigured
@@ -19,6 +20,21 @@ TF_ENABLE_ONEDNN_OPTS = '0'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# 비동기를 위한 세팅(pip install channels)
+# ASGI_APPLICATION = 'kakao_py39.routing.application'
+
+# Celery 설정
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# Celery Beat 설정
+# CELERY_BEAT_SCHEDULE = {
+#     'task_name': {
+#         'task': 'app.tasks.task_name',
+#         'schedule': timedelta(minutes=5),
+#     },
+# }
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/

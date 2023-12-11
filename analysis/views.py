@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import time
 from datetime import datetime
 
 from django.http import JsonResponse
@@ -10,6 +11,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from analysis.models import MyResNet50Model
+from .tasks import celery_analysis_picture
 
 UPLOAD_DIR = 'static/images/'
 
@@ -19,77 +21,36 @@ def resnet1_writer(request):
     return render(request, "analysis/img_test.html")
 
 
+# analysis > views.py 파일임.
 # 이미지 분석 api
 @csrf_exempt
 def analysis_picture(request):
     load_json = json.loads(request.body.decode('utf8'))
-    # print(str(load_json))
-    secureimage_str = load_json.get('action').get('params').get("secureimage", '{}')
-    # print(secureimage_str)
-    match = re.search(r'"secureUrls":"(List\(.+?\))"', secureimage_str)
-    secure_urls_str = match.group(1)[5:-1]
-    # print(secure_urls_str)
+    print(str(load_json))
+    # secureimage_str = load_json.get('action').get('params').get("secureimage", '{}')
+    # # print(secureimage_str)
+    # match = re.search(r'"secureUrls":"(List\(.+?\))"', secureimage_str)
+    # secure_urls_str = match.group(1)[5:-1]
 
-    now = datetime.now()
-    # datetime 객체를 초로 변환합니다.
-    timestamp = str(int(now.timestamp()))
+    print('**********')
 
-    response = requests.get(secure_urls_str)
-    myModel = MyResNet50Model()
+    secure_urls_str = json.loads(load_json['action']['params']['img'])['secureUrls']
+    secure_urls_str = secure_urls_str.replace('List(', '').replace(')', '')
 
-    if response.status_code == 200:
-        image_data = response.content
+    print(secure_urls_str)
+    print(f'타입 : {type(secure_urls_str)}')
 
-        save_path = os.path.join(UPLOAD_DIR, f"{timestamp}.jpg")
+    # callbackUrl 추출
+    callback_url = load_json['userRequest']['callbackUrl']
+    print('callback_url : ', callback_url)
 
-        with open(save_path, "wb") as f:
-            f.write(image_data)
+    # # 비동기처리 - 사진분석 함수 호출
+    # celery_analysis_picture.apply_async(args=(secure_urls_str, callback_url,))
 
-    else:
-        print(f"Failed to download image. Status code: {response.status_code}")
-
-    top = myModel.myImagePredict(UPLOAD_DIR + f"{timestamp}.jpg")
-
-    res = top[0][1]
-    resProba = float(f"{top[0][2]:.3f}") * 100
-    f_resProba = f"{resProba:.1f}"
-
-    # res2 = top[1][1]
-    # resProba2 = float(f"{top[1][2]:.3f}") * 100
-    # f_resProba2 = f"{resProba2:.1f}"
-    #
-    # res3 = top[2][1]
-    # resProba3 = float(f"{top[2][2]:.3f}") * 100
-    # f_resProba3 = f"{resProba3:.1f}"
-
-    translator = Translator()
-    ko_res = translator.translate(res, dest='ko').text
-    # ko_res2 = translator.translate(res2, dest='ko').text
-    # ko_res3 = translator.translate(res3, dest='ko').text
-
+    print('처음 받았던 요청에 응답 보내기')
     return JsonResponse({
         "version": "2.0",
-        "template": {
-            "outputs": [
-                {
-                    "basicCard": {
-                        "title": f"예측 결과 : {ko_res}",
-                        "description": f"'{ko_res}'일 확률이 {f_resProba}%입니다.",
-                        # "description": f"'{ko_res}'일 확률이 {f_resProba}%입니다. \n\n(후보)\n'{ko_res2}'일 확률이 {f_resProba2}%\n'{ko_res3}'일 확률이 {f_resProba3}%",
-                        "thumbnail": {
-                            "imageUrl": secure_urls_str
-                        },
-                        "buttons": [
-                            {
-                                "action": "webLink",
-                                "label": "크게보기",
-                                "webLinkUrl": secure_urls_str
-                            }
-                        ]
-                    }
-                }
-            ]
-        }
+        "useCallback": True,
     })
 
 
