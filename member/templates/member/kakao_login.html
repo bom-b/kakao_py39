@@ -1,0 +1,73 @@
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="ko">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>카카오톡으로 로그인</title>#}
+{#</head>#}
+{#<body>#}
+{#    <div>#}
+{#        <img src="{% static 'chungyein.jpg' %}" alt="chungyein">#}
+{#    </div>#}
+{#    <a href="javascript:kakaoLogin();"><img src="{% static 'kakao_login_medium_wide.png' %}" alt="kakao"></a>#}
+{#    <p id="token-result"></p>#}
+{#    <button class="api-btn" onclick="requestUserInfo()" style="visibility:hidden">사용자 정보 가져오기</button>#}
+{#</body>#}
+{#<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js" integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>#}
+{#<script>#}
+{#    window.Kakao.init("a96e4e4265ea9c04a13b8f2df45680bc");#}
+{#</script>#}
+{#<script>#}
+{#    function kakaoLogin() {#}
+{#        Kakao.Auth.authorize({#}
+{#          redirectUri: 'http://localhost:8000/member/login_page',#}
+{#        });#}
+{#    }#}
+{##}
+{#    displayToken()#}
+{#    function displayToken() {#}
+{#        var token = getCookie('authorize-access-token');#}
+{##}
+{#        if (token) {#}
+{#            Kakao.Auth.setAccessToken(token);#}
+{#            Kakao.Auth.getStatusInfo()#}
+{#                .then(function (res) {#}
+{#                    if (res.status === 'connected') {#}
+{#                        document.getElementById('token-result').innerText#}
+{#                            = 'login success, token: ' + Kakao.Auth.getAccessToken();#}
+{#                    }#}
+{#                })#}
+{#                .catch(function (err) {#}
+{#                    Kakao.Auth.setAccessToken(null);#}
+{#                    console.log('토큰 가져오기 실패')#}
+{#                });#}
+{#        }#}
+{#    }#}
+{##}
+{#    function getCookie(name) {#}
+{#        var parts = document.cookie.split(name + '=');#}
+{#        if (parts.length === 2) {#}
+{#            return parts[1].split(';')[0];#}
+{#        }#}
+{#    }#}
+{#</script>#}
+{#</html>#}
+{#<script>#}
+{#    window.Kakao.init("a96e4e4265ea9c04a13b8f2df45680bc");#}
+{##}
+{#    function kakaoLogin() {#}
+{#        window.Kakao.Auth.login({#}
+{#            scope:'profile_nickname, profile_image, account_email',#}
+{#            success: function(authObj) {#}
+{#                console.log(authObj);#}
+{#                window.Kakao.API.request({#}
+{#                    url:'/v2/user/me',#}
+{#                    sucess:res => {#}
+{#                        const kakao_account = res.kakao_account;#}
+{#                        console.log(kakao_account);#}
+{#                    }#}
+{#                });#}
+{#            }#}
+{#        });#}
+{#    }#}
+{#</script>#}
