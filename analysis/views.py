@@ -27,11 +27,6 @@ def resnet1_writer(request):
 def analysis_picture(request):
     load_json = json.loads(request.body.decode('utf8'))
     print(str(load_json))
-    # secureimage_str = load_json.get('action').get('params').get("secureimage", '{}')
-    # # print(secureimage_str)
-    # match = re.search(r'"secureUrls":"(List\(.+?\))"', secureimage_str)
-    # secure_urls_str = match.group(1)[5:-1]
-
     print('**********')
 
     secure_urls_str = json.loads(load_json['action']['params']['img'])['secureUrls']
@@ -44,8 +39,8 @@ def analysis_picture(request):
     callback_url = load_json['userRequest']['callbackUrl']
     print('callback_url : ', callback_url)
 
-    # # 비동기처리 - 사진분석 함수 호출
-    # celery_analysis_picture.apply_async(args=(secure_urls_str, callback_url,))
+    # 비동기처리 - 사진분석 함수 호출
+    celery_analysis_picture.apply_async(args=(secure_urls_str, callback_url,))
 
     print('처음 받았던 요청에 응답 보내기')
     return JsonResponse({
