@@ -25,7 +25,7 @@ def communication_test(request):
     # print(plusfriend_user_key)
     return JsonResponse({
         "version": "2.0",
-        "templates": {
+        "template": {
             "outputs": [
                 {
                     "simpleText": {
