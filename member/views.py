@@ -34,12 +34,14 @@ def check(request):
 
 
 def member_join(request):
+    is_success = 0
     dto = Members(
         nickname=request.POST['nickname'],
         kakaotalk_cord=request.POST['kakaotalk_cord']
     )
     dto.save()
-    return redirect("success_page")
+    is_success = 1
+    return JsonResponse({'is_sing': is_success})
 
 
 @csrf_exempt

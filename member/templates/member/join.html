@@ -110,6 +110,7 @@
                             contentType: false,
                             success: function (joinResponse) {
                                 console.log('회원 가입 성공');
+                                window.location.href = '/member/success_page';
                             },
                             error: function (joinError) {
                                 console.log('회원 가입 에러:', joinError);
