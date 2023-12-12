@@ -25,8 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ASGI_APPLICATION = 'kakao_py39.routing.application'
 
 # Celery 설정
-CELERY_BROKER_URL = 'redis://15.164.252.196:6379'
-CELERY_RESULT_BACKEND = 'redis://15.164.252.196:6379'
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 # 윈도우 전용 설정
 # CELERY_BROKER_URL = 'redis://localhost:6379'
 # CELERY_RESULT_BACKEND = 'redis://localhost:6379'
