@@ -39,7 +39,7 @@ def member_join(request):
         kakaotalk_cord=request.POST['kakaotalk_cord']
     )
     dto.save()
-    return redirect("member/suceess_page")
+    return redirect("member/success_page")
 
 
 @csrf_exempt

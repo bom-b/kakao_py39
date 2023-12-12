@@ -4,6 +4,8 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
+from member.models import Members
+
 
 # Create your views here.
 def mymain(request):
@@ -15,21 +17,37 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def communication_test(request):
+    load_json = json.loads(request.body.decode('utf8'))
+
+    plusfriend_user_key = load_json.get('userRequest', {}).get('user', {}).get('properties', {}).get(
+        'plusfriend_user_key')
+
     try:
-        load_json = json.loads(request.body.decode('utf8'))
-        print(str(load_json))
-        plusfriend_user_key = load_json.get('userRequest', {}).get('user', {}).get('properties', {}).get(
-            'plusfriend_user_key', '접속 성공 했으나 유저 정보 없음')
-    except:
-        plusfriend_user_key = '정상 접속이 아님'
-    # print(plusfriend_user_key)
+        member = Members.objects.get(kakaotalk_cord=plusfriend_user_key)
+        member_nickname = str(member.nickname)
+
+    except Members.DoesNotExist:
+        print("해당하는 멤버가 존재하지 않습니다.")
+        return JsonResponse({
+            "version": "2.0",
+            "template": {
+                "outputs": [
+                    {
+                        "simpleText": {
+                            "text": "서버 연결 상태: 정상\n회원가입 기록이 없습니다."
+                        }
+                    }
+                ]
+            }
+        })
+
     return JsonResponse({
         "version": "2.0",
         "template": {
             "outputs": [
                 {
                     "simpleText": {
-                        "text": f"서버 연결 상태: 정상 \n접속 유저 : {plusfriend_user_key}"
+                        "text": f"서버 연결 상태: 정상 \n{member_nickname}님, 안녕하세요."
                     }
                 }
             ]
