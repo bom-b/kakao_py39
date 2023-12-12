@@ -34,7 +34,7 @@ def communication_test(request):
                 "outputs": [
                     {
                         "simpleText": {
-                            "text": "서버 연결 상태: 정상\n회원가입 기록이 없습니다."
+                            "text": "회원가입 기록이 없습니다. 회원가입 해주세요!"
                         }
                     }
                 ]
@@ -47,7 +47,7 @@ def communication_test(request):
             "outputs": [
                 {
                     "simpleText": {
-                        "text": f"서버 연결 상태: 정상 \n{member_nickname}님, 안녕하세요."
+                        "text": f"{member_nickname}님, 안녕하세요."
                     }
                 }
             ]

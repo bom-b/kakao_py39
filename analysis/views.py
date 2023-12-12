@@ -11,6 +11,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from analysis.models import MyResNet50Model
+from member.models import Members
 from .tasks import celery_analysis_picture
 
 UPLOAD_DIR = 'media/analysis/'
@@ -26,8 +27,6 @@ def resnet1_writer(request):
 @csrf_exempt
 def analysis_picture(request):
     load_json = json.loads(request.body.decode('utf8'))
-    print(str(load_json))
-    print('**********')
 
     # 'secureimage' 키가 있는지 확인
     if 'secureimage' in load_json['action']['params']:
@@ -39,20 +38,35 @@ def analysis_picture(request):
         secure_urls_str = json.loads(load_json['action']['params']['img'])['secureUrls']
         secure_urls_str = secure_urls_str.replace('List(', '').replace(')', '')
 
-    print(secure_urls_str)
-    # print(f'타입 : {type(secure_urls_str)}')
-
     # callbackUrl 추출
     callback_url = load_json['userRequest']['callbackUrl']
-    print('callback_url : ', callback_url)
+
+    # plusfriend_user_key 추출
+    plusfriend_user_key = load_json.get('userRequest', {}).get('user', {}).get('properties', {}).get(
+        'plusfriend_user_key')
+
+    try:
+        member = Members.objects.get(kakaotalk_cord=plusfriend_user_key)
+        member_nickname = str(member.nickname)
+        is_in = True
+
+    except Members.DoesNotExist:
+        is_in = False
+
+    if is_in:
+        msg = f"{member_nickname}님 안녕하세요!\n\n사진을 분석하는 동안 잠시 기다려 주세요!"
+    else:
+        msg = f"데이터를 저장 하시려면 회원가입을 해주세요.\n\n사진을 분석하는 동안 잠시 기다려 주세요!"
 
     # 비동기처리 - 사진분석 함수 호출
     celery_analysis_picture.apply_async(args=(secure_urls_str, callback_url,))
 
-    print('처음 받았던 요청에 응답 보내기')
     return JsonResponse({
         "version": "2.0",
         "useCallback": True,
+        "data": {
+            "text": msg
+        }
     })
 
 

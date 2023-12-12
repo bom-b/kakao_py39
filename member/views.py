@@ -102,7 +102,7 @@ def request_join(request):
                             {
                                 "action": "webLink",
                                 "label": "회원가입",
-                                "webLinkUrl": "http://http://15.164.252.196/member/join_page"
+                                "webLinkUrl": "http://15.164.252.196/member/join_page"
                             }
                         ]
                     }
