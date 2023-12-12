@@ -29,7 +29,7 @@ def analysis_picture(request):
     print(str(load_json))
     print('**********')
 
-    secure_urls_str = json.loads(load_json['action']['params']['img'])['secureUrls']
+    secure_urls_str = json.loads(load_json['action']['params']['secureimage'])['secureUrls']
     secure_urls_str = secure_urls_str.replace('List(', '').replace(')', '')
 
     print(secure_urls_str)
