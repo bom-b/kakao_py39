@@ -3,17 +3,20 @@ import os
 import time
 from datetime import datetime
 import requests
+from celery import Celery
+
 from kakao_py39.celery import app
 from googletrans import Translator
 from analysis.models import MyResNet50Model
 
-UPLOAD_DIR = 'static/images/'
+UPLOAD_DIR = 'media/analysis/'
 
-
+app = Celery('tasks', broker='redis://127.0.0.1:6379')
 # analysis > tasks.py 파일임.
 @app.task
 # @csrf_exempt
-def celery_analysis_picture(callback_url, secure_urls_str):
+def celery_analysis_picture(secure_urls_str, callback_url):
+
     now = datetime.now()
     # datetime 객체를 초로 변환합니다.
     timestamp = str(int(now.timestamp()))

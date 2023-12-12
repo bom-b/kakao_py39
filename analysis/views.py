@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from analysis.models import MyResNet50Model
 from .tasks import celery_analysis_picture
 
-UPLOAD_DIR = 'static/images/'
+UPLOAD_DIR = 'media/analysis/'
 
 
 # 테스트폼
