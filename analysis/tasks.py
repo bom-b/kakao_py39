@@ -41,7 +41,7 @@ def celery_analysis_picture(secure_urls_str, callback_url):
     f_resProba = f"{resProba:.1f}"
 
     translator = Translator()
-    ko_res = translator.translate(res, dest='ko').text
+    ko_res = translator.translate(res, dest='en', src='ko').text
 
     # 응답 데이터 생성
     response_data = {
