@@ -1,8 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>메인페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
     @font-face {
@@ -44,25 +47,14 @@
 </style>
 </head>
 <body>
-    <h4>kakao_api_python 3.9버전</h4>
-    <h1 class="TheJamsil400">메인페이지 입니다.</h1>
-    <div>
-        <p>테스트 아이피 : 116.255.102.141</p>
-        <p>json 요청 링크</p>
-        <p>접속 테스트 : http://15.164.252.196/communication_test</p>
-        <p>사진 분석 : http://15.164.252.196/analysis/analysis_picture</p>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <h2 class="row justify-content-center mb-4 TheJamsil400">회원가입이 성공적으로 완료되었습니다.</h2>
     </div>
-    <div style="margin-top: 100px;">
-        <div>
-            <a href="/communication_test">접속 테스트 페이지</a>
-        </div>
-        <div>
-            <a href="/analysis/picture_test_form">사진분석 테스트 페이지</a>
-        </div>
-    </div>
-    <div style="margin-top: 100px;">
-        <p>회원 관련 페이지</p>
-        <a href="/member/join_page">회원가입</a>
-    </div>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
