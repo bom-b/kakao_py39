@@ -29,11 +29,18 @@ def analysis_picture(request):
     print(str(load_json))
     print('**********')
 
-    secure_urls_str = json.loads(load_json['action']['params']['secureimage'])['secureUrls']
-    secure_urls_str = secure_urls_str.replace('List(', '').replace(')', '')
+    # 'secureimage' 키가 있는지 확인
+    if 'secureimage' in load_json['action']['params']:
+        secure_urls_str = json.loads(load_json['action']['params']['secureimage'])['secureUrls']
+        secure_urls_str = secure_urls_str.replace('List(', '').replace(')', '')
+
+    else:
+        # 'secureimage' 키가 없는 경우의 처리
+        secure_urls_str = json.loads(load_json['action']['params']['img'])['secureUrls']
+        secure_urls_str = secure_urls_str.replace('List(', '').replace(')', '')
 
     print(secure_urls_str)
-    print(f'타입 : {type(secure_urls_str)}')
+    # print(f'타입 : {type(secure_urls_str)}')
 
     # callbackUrl 추출
     callback_url = load_json['userRequest']['callbackUrl']
