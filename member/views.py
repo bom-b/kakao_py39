@@ -106,6 +106,11 @@ def request_join(request):
                             }
                         ]
                     }
+                },
+                {
+                    "simpleText": {
+                        "text": f"{plusfriend_user_key}"
+                    }
                 }
             ]
         }
