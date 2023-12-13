@@ -96,7 +96,7 @@ def request_join(request):
             "outputs": [
                 {
                     "textCard": {
-                        "title": f"회원가입 코드 : {plusfriend_user_key}",
+                        "title": f"카카오톡채널 연동 코드 : {plusfriend_user_key}",
                         "description": "코드를 회원가입시 입력해주세요.\n",
                         "buttons": [
                             {
