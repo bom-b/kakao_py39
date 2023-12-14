@@ -82,66 +82,6 @@ def recommend_menu(request):
         member = Members.objects.get(kakaotalk_cord=plusfriend_user_key)
         member_nickname = str(member.nickname)
 
-        return JsonResponse({
-            "version": "2.0",
-            "template": {
-                "outputs": [
-                    {
-                        "simpleText": {
-                            "text": f"{member_nickname}님, 저녁 식단을 추천해드리겠습니다."
-                        },
-                        "carousel": {
-                            "type": "basicCard",
-                            "items": [
-                                {
-                                    "title": "삼계탕",
-                                    "description": "칼로리 : 900kcal\n단백질 : 20g\n탄수화물 : 50g\n...",
-                                    "thumbnail": {
-                                        "imageUrl": "https://www.chuksannews.co.kr/data/photos/20210414/art_16177684990221_d040c6.jpg"
-                                    },
-                                    "buttons": [
-                                        {
-                                            "action": "message",
-                                            "label": "자세히 보기",
-                                            "messageText": "고마워"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "밥, 무국, 김치, 시금치무침",
-                                    "description": "칼로리 : 1200kcal\n단백질 : 20g\n탄수화물 : 50g\n...",
-                                    "thumbnail": {
-                                        "imageUrl": "https://mblogthumb-phinf.pstatic.net/MjAxODAyMjRfMjk0/MDAxNTE5NDQwMTg1OTU2.JKq0-d5KiA2gjilMpNrxuPZ86HHtgnlge_aroIMq3jog.N9lBjy-ORkGnLNnHtozpPccDaw0Q_56afp2VLUJewegg.JPEG.valueyey/%EC%95%84%EC%B9%A8%EC%8B%9D%ED%83%81.JPG?type=w800"
-                                    },
-                                    "buttons": [
-                                        {
-                                            "action": "message",
-                                            "label": "자세히 보기",
-                                            "messageText": "고마워"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "샐러드 식단",
-                                    "description": "칼로리 : 600kcal\n단백질 : 10g\n탄수화물 : 10g\n...",
-                                    "thumbnail": {
-                                        "imageUrl": "https://mblogthumb-phinf.pstatic.net/MjAxODAyMTBfMjkg/MDAxNTE4MTkzMjEyNDM0.3Ue2J07GN7V06QsXCClc8gl_v6PZgOI_7W8twpr5OVYg.PUR96dsqG0gEQMtAUhlSRmXnMr0PuEwyB97WN-wbkSYg.JPEG.hnojkm/image_8899831471518193179987.jpg?type=w800"
-                                    },
-                                    "buttons": [
-                                        {
-                                            "action": "message",
-                                            "label": "자세히 보기",
-                                            "messageText": "고마워"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    }
-                ]
-            }
-        })
-
     except:
         return JsonResponse({
             "version": "2.0",
@@ -156,7 +96,65 @@ def recommend_menu(request):
             }
         })
 
-
+    return JsonResponse({
+        "version": "2.0",
+        "template": {
+            "outputs": [
+                {
+                    "simpleText": {
+                        "text": f"{member_nickname}님, 저녁 식단을 추천해드리겠습니다."
+                    },
+                    "carousel": {
+                        "type": "basicCard",
+                        "items": [
+                            {
+                                "title": "삼계탕",
+                                "description": "칼로리 : 900kcal\n단백질 : 20g\n탄수화물 : 50g\n...",
+                                "thumbnail": {
+                                    "imageUrl": "https://www.chuksannews.co.kr/data/photos/20210414/art_16177684990221_d040c6.jpg"
+                                },
+                                "buttons": [
+                                    {
+                                        "action": "message",
+                                        "label": "자세히 보기",
+                                        "messageText": "고마워"
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "밥, 무국, 김치, 시금치무침",
+                                "description": "칼로리 : 1200kcal\n단백질 : 20g\n탄수화물 : 50g\n...",
+                                "thumbnail": {
+                                    "imageUrl": "https://mblogthumb-phinf.pstatic.net/MjAxODAyMjRfMjk0/MDAxNTE5NDQwMTg1OTU2.JKq0-d5KiA2gjilMpNrxuPZ86HHtgnlge_aroIMq3jog.N9lBjy-ORkGnLNnHtozpPccDaw0Q_56afp2VLUJewegg.JPEG.valueyey/%EC%95%84%EC%B9%A8%EC%8B%9D%ED%83%81.JPG?type=w800"
+                                },
+                                "buttons": [
+                                    {
+                                        "action": "message",
+                                        "label": "자세히 보기",
+                                        "messageText": "고마워"
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "샐러드 식단",
+                                "description": "칼로리 : 600kcal\n단백질 : 10g\n탄수화물 : 10g\n...",
+                                "thumbnail": {
+                                    "imageUrl": "https://mblogthumb-phinf.pstatic.net/MjAxODAyMTBfMjkg/MDAxNTE4MTkzMjEyNDM0.3Ue2J07GN7V06QsXCClc8gl_v6PZgOI_7W8twpr5OVYg.PUR96dsqG0gEQMtAUhlSRmXnMr0PuEwyB97WN-wbkSYg.JPEG.hnojkm/image_8899831471518193179987.jpg?type=w800"
+                                },
+                                "buttons": [
+                                    {
+                                        "action": "message",
+                                        "label": "자세히 보기",
+                                        "messageText": "고마워"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    })
 
 
 # 테스트용
