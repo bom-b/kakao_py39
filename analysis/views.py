@@ -104,6 +104,8 @@ def recommend_menu(request):
                     "simpleText": {
                         "text": f"{member_nickname}님, 저녁 식단을 추천해드리겠습니다."
                     },
+                },
+                {
                     "carousel": {
                         "type": "basicCard",
                         "items": [
