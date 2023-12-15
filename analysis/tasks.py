@@ -50,17 +50,77 @@ def celery_analysis_picture(secure_urls_str, callback_url):
         "template": {
             "outputs": [
                 {
-                    "basicCard": {
-                        "title": f"예측 결과 : {ko_res}",
-                        "description": f"'{ko_res}'일 확률이 {f_resProba}%입니다.",
-                        "thumbnail": {
-                            "imageUrl": secure_urls_str
+                    "itemCard": {
+                        "imageTitle": {
+                            "title": f"{ko_res}",
+                            "description": f"'{ko_res}'일 확률이 {f_resProba}%입니다."
                         },
+                        "title": "",
+                        "description": "",
+                        "thumbnail": {
+                            "imageUrl": "secure_urls_str,",
+                            "width": 800,
+                            "height": 800
+                        },
+                        "itemList": [
+                            {
+                                "title": "칼로리",
+                                "description": "900kcal"
+                            },
+                            {
+                                "title": "단백질",
+                                "description": "20g"
+                            },
+                            {
+                                "title": "탄수화물",
+                                "description": "50g"
+                            },
+                            {
+                                "title": "지방",
+                                "description": "포화지방: 10g\n트랜스지방: 0g\n불포화지방: 10g"
+                            },
+                            {
+                                "title": "콜레스테롤",
+                                "description": "121mg"
+                            },
+                            {
+                                "title": "나트륨",
+                                "description": "1924mg"
+                            }
+                        ],
+                        "itemListAlignment": "right",
+                        "buttonLayout": "vertical"
+                    }
+                },
+                {
+                    "textCard": {
+                        "title": "제공한 데이터가 올바른가요?",
+                        "description": '수정이 필요하다면 말씀해주세요.',
                         "buttons": [
                             {
-                                "action": "webLink",
-                                "label": "크게보기",
-                                "webLinkUrl": secure_urls_str
+                                "action": "message",
+                                "label": "이대로 기록하기",
+                                "messageText": "식단 기록하기"
+                            },
+                            {
+                                "action": "message",
+                                "label": "사진 다시 올리기",
+                                "messageText": "식단 등록"
+                            },
+                            {
+                                "action": "message",
+                                "label": "사진 다시 분석하기",
+                                "messageText": "사진 다시 분석하기"
+                            },
+                            {
+                                "action": "message",
+                                "label": "영양 정보만 수정하기",
+                                "messageText": "영양 정보만 수정하기"
+                            },
+                            {
+                                "action": "message",
+                                "label": "모두 수동으로 입력하기",
+                                "messageText": "모두 수동으로 입력하기"
                             }
                         ]
                     }

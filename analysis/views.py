@@ -53,9 +53,8 @@ def analysis_picture(request):
     except Members.DoesNotExist:
         is_in = False
 
-        msg = "사진을 분석하는 동안 잠시 기다려 주세요!"
     if is_in:
-        msg = f"{member_nickname}님 안녕하세요!\n\n사진을 분석하는 동안 잠시 기다려 주세요!"
+        msg = f"사진을 분석하는 동안 잠시 기다려 주세요!"
     else:
         msg = f"데이터를 저장 하시려면 회원가입을 해주세요.\n\n사진을 분석하는 동안 잠시 기다려 주세요!"
 
@@ -66,7 +65,8 @@ def analysis_picture(request):
         "version": "2.0",
         "useCallback": True,
         "data": {
-            "msg": msg
+            "msg": msg,
+            "load_json": str(load_json)
         }
     })
 
@@ -110,201 +110,200 @@ def recommend_menu(request):
                     "carousel": {
                         "type": "itemCard",
                         "items": [
+
                             {
-                                "itemCard": {
-                                    "imageTitle": {
-                                        "title": "삼계탕",
-                                        "description": "1인분 기준"
+                                "imageTitle": {
+                                    "title": "삼계탕",
+                                    "description": "1인분 기준"
+                                },
+                                "title": "",
+                                "description": "",
+                                "thumbnail": {
+                                    "imageUrl": "https://www.chuksannews.co.kr/data/photos/20210414/art_16177684990221_d040c6.jpg",
+                                    "width": 800,
+                                    "height": 800
+                                },
+                                "itemList": [
+                                    {
+                                        "title": "칼로리",
+                                        "description": "900kcal"
                                     },
-                                    "title": "",
-                                    "description": "",
-                                    "thumbnail": {
-                                        "imageUrl": "https://www.chuksannews.co.kr/data/photos/20210414/art_16177684990221_d040c6.jpg",
-                                        "width": 800,
-                                        "height": 800
+                                    {
+                                        "title": "단백질",
+                                        "description": "20g"
                                     },
-                                    "itemList": [
-                                        {
-                                            "title": "칼로리",
-                                            "description": "900kcal"
-                                        },
-                                        {
-                                            "title": "단백질",
-                                            "description": "20g"
-                                        },
-                                        {
-                                            "title": "탄수화물",
-                                            "description": "50g"
-                                        },
-                                        {
-                                            "title": "지방",
-                                            "description": "포화지방: 10g\n트랜스지방: 0g\n불포화지방: 10g"
-                                        },
-                                        {
-                                            "title": "콜레스테롤",
-                                            "description": "121mg"
-                                        },
-                                        {
-                                            "title": "나트륨",
-                                            "description": "1924mg"
-                                        }
-                                    ],
-                                    "buttons": [
-                                        {
-                                            "action": "message",
-                                            "label": "자세히 보기",
-                                            "messageText": "고마워"
-                                        }
-                                    ],
-                                    "buttonLayout": "vertical"
-                                }
+                                    {
+                                        "title": "탄수화물",
+                                        "description": "50g"
+                                    },
+                                    {
+                                        "title": "지방",
+                                        "description": "포화지방: 10g\n트랜스지방: 0g\n불포화지방: 10g"
+                                    },
+                                    {
+                                        "title": "콜레스테롤",
+                                        "description": "121mg"
+                                    },
+                                    {
+                                        "title": "나트륨",
+                                        "description": "1924mg"
+                                    }
+                                ],
+                                "buttons": [
+                                    {
+                                        "action": "message",
+                                        "label": "자세히 보기",
+                                        "messageText": "고마워"
+                                    }
+                                ],
+                                "buttonLayout": "vertical"
                             },
+
                             {
-                                "itemCard": {
-                                    "imageTitle": {
-                                        "title": "밥, 무국, 김치, 시금치무침",
-                                        "description": "1인분 기준"
+                                "imageTitle": {
+                                    "title": "밥, 무국, 김치, 시금치무침",
+                                    "description": "1인분 기준"
+                                },
+                                "title": "",
+                                "description": "",
+                                "thumbnail": {
+                                    "imageUrl": "https://www.chuksannews.co.kr/data/photos/20210414/art_16177684990221_d040c6.jpg",
+                                    "width": 800,
+                                    "height": 800
+                                },
+                                "itemList": [
+                                    {
+                                        "title": "칼로리",
+                                        "description": "900kcal"
                                     },
-                                    "title": "",
-                                    "description": "",
-                                    "thumbnail": {
-                                        "imageUrl": "https://www.chuksannews.co.kr/data/photos/20210414/art_16177684990221_d040c6.jpg",
-                                        "width": 800,
-                                        "height": 800
+                                    {
+                                        "title": "단백질",
+                                        "description": "20g"
                                     },
-                                    "itemList": [
-                                        {
-                                            "title": "칼로리",
-                                            "description": "900kcal"
-                                        },
-                                        {
-                                            "title": "단백질",
-                                            "description": "20g"
-                                        },
-                                        {
-                                            "title": "탄수화물",
-                                            "description": "50g"
-                                        },
-                                        {
-                                            "title": "지방",
-                                            "description": "포화지방: 10g\n트랜스지방: 0g\n불포화지방: 10g"
-                                        },
-                                        {
-                                            "title": "콜레스테롤",
-                                            "description": "121mg"
-                                        },
-                                        {
-                                            "title": "나트륨",
-                                            "description": "1924mg"
-                                        }
-                                    ],
-                                    "buttons": [
-                                        {
-                                            "action": "message",
-                                            "label": "자세히 보기",
-                                            "messageText": "고마워"
-                                        }
-                                    ],
-                                    "buttonLayout": "vertical"
-                                }
+                                    {
+                                        "title": "탄수화물",
+                                        "description": "50g"
+                                    },
+                                    {
+                                        "title": "지방",
+                                        "description": "포화지방: 10g\n트랜스지방: 0g\n불포화지방: 10g"
+                                    },
+                                    {
+                                        "title": "콜레스테롤",
+                                        "description": "121mg"
+                                    },
+                                    {
+                                        "title": "나트륨",
+                                        "description": "1924mg"
+                                    }
+                                ],
+                                "buttons": [
+                                    {
+                                        "action": "message",
+                                        "label": "자세히 보기",
+                                        "messageText": "고마워"
+                                    }
+                                ],
+                                "buttonLayout": "vertical"
+
                             },
+
                             {
-                                "itemCard": {
-                                    "imageTitle": {
-                                        "title": "삼겹살",
-                                        "description": "200g 기준"
+                                "imageTitle": {
+                                    "title": "삼겹살",
+                                    "description": "200g 기준"
+                                },
+                                "title": "",
+                                "description": "",
+                                "thumbnail": {
+                                    "imageUrl": "https://www.chuksannews.co.kr/data/photos/20210414/art_16177684990221_d040c6.jpg",
+                                    "width": 800,
+                                    "height": 800
+                                },
+                                "itemList": [
+                                    {
+                                        "title": "칼로리",
+                                        "description": "661kcal"
                                     },
-                                    "title": "",
-                                    "description": "",
-                                    "thumbnail": {
-                                        "imageUrl": "https://www.chuksannews.co.kr/data/photos/20210414/art_16177684990221_d040c6.jpg",
-                                        "width": 800,
-                                        "height": 800
+                                    {
+                                        "title": "단백질",
+                                        "description": "34.47g"
                                     },
-                                    "itemList": [
-                                        {
-                                            "title": "칼로리",
-                                            "description": "661kcal"
-                                        },
-                                        {
-                                            "title": "단백질",
-                                            "description": "34.47g"
-                                        },
-                                        {
-                                            "title": "탄수화물",
-                                            "description": "1.18g"
-                                        },
-                                        {
-                                            "title": "지방",
-                                            "description": "포화지방: 19.342g\n트랜스지방: 0g\n불포화지방: 25.512g"
-                                        },
-                                        {
-                                            "title": "콜레스테롤",
-                                            "description": "121mg"
-                                        },
-                                        {
-                                            "title": "나트륨",
-                                            "description": "1924mg"
-                                        }
-                                    ],
-                                    "buttons": [
-                                        {
-                                            "action": "message",
-                                            "label": "자세히 보기",
-                                            "messageText": "고마워"
-                                        }
-                                    ],
-                                    "buttonLayout": "vertical"
-                                }
+                                    {
+                                        "title": "탄수화물",
+                                        "description": "1.18g"
+                                    },
+                                    {
+                                        "title": "지방",
+                                        "description": "포화지방: 19.342g\n트랜스지방: 0g\n불포화지방: 25.512g"
+                                    },
+                                    {
+                                        "title": "콜레스테롤",
+                                        "description": "121mg"
+                                    },
+                                    {
+                                        "title": "나트륨",
+                                        "description": "1924mg"
+                                    }
+                                ],
+                                "buttons": [
+                                    {
+                                        "action": "message",
+                                        "label": "자세히 보기",
+                                        "messageText": "고마워"
+                                    }
+                                ],
+                                "buttonLayout": "vertical"
+
                             },
+
                             {
-                                "itemCard": {
-                                    "imageTitle": {
-                                        "title": "샐러드 식단",
-                                        "description": "1인분 기준"
+                                "imageTitle": {
+                                    "title": "샐러드 식단",
+                                    "description": "1인분 기준"
+                                },
+                                "title": "",
+                                "description": "",
+                                "thumbnail": {
+                                    "imageUrl": "https://www.chuksannews.co.kr/data/photos/20210414/art_16177684990221_d040c6.jpg",
+                                    "width": 800,
+                                    "height": 800
+                                },
+                                "itemList": [
+                                    {
+                                        "title": "칼로리",
+                                        "description": "900kcal"
                                     },
-                                    "title": "",
-                                    "description": "",
-                                    "thumbnail": {
-                                        "imageUrl": "https://www.chuksannews.co.kr/data/photos/20210414/art_16177684990221_d040c6.jpg",
-                                        "width": 800,
-                                        "height": 800
+                                    {
+                                        "title": "단백질",
+                                        "description": "20g"
                                     },
-                                    "itemList": [
-                                        {
-                                            "title": "칼로리",
-                                            "description": "900kcal"
-                                        },
-                                        {
-                                            "title": "단백질",
-                                            "description": "20g"
-                                        },
-                                        {
-                                            "title": "탄수화물",
-                                            "description": "50g"
-                                        },
-                                        {
-                                            "title": "지방",
-                                            "description": "포화지방: 10g\n트랜스지방: 0g\n불포화지방: 10g"
-                                        },
-                                        {
-                                            "title": "콜레스테롤",
-                                            "description": "121mg"
-                                        },
-                                        {
-                                            "title": "나트륨",
-                                            "description": "1924mg"
-                                        }
-                                    ],
-                                    "buttons": [
-                                        {
-                                            "action": "message",
-                                            "label": "자세히 보기",
-                                            "messageText": "고마워"
-                                        }
-                                    ],
-                                    "buttonLayout": "vertical"
-                                }
+                                    {
+                                        "title": "탄수화물",
+                                        "description": "50g"
+                                    },
+                                    {
+                                        "title": "지방",
+                                        "description": "포화지방: 10g\n트랜스지방: 0g\n불포화지방: 10g"
+                                    },
+                                    {
+                                        "title": "콜레스테롤",
+                                        "description": "121mg"
+                                    },
+                                    {
+                                        "title": "나트륨",
+                                        "description": "1924mg"
+                                    }
+                                ],
+                                "buttons": [
+                                    {
+                                        "action": "message",
+                                        "label": "자세히 보기",
+                                        "messageText": "고마워"
+                                    }
+                                ],
+                                "buttonLayout": "vertical"
+
                             }
                         ]
                     }
