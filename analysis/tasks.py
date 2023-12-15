@@ -1,5 +1,6 @@
 import json
 import os
+import random
 import time
 from datetime import datetime
 import requests
@@ -45,6 +46,16 @@ def celery_analysis_picture(secure_urls_str, callback_url, plusfriend_user_key, 
     translator = Translator()
     ko_res = translator.translate(res, dest='ko', src='en').text
 
+    # 랜덤 수치 생성
+    calorie = random.randint(0, 10000)
+    protein = random.randint(0, 100)
+    carbohydrate = random.randint(0, 100)
+    fat1 = random.randint(0, 100)
+    fat2 = random.randint(0, 100)
+    fat3 = random.randint(0, 100)
+    cholesterol = random.randint(0, 100)
+    sodium = random.randint(0, 1000)
+
     # 응답 데이터 생성
     response_data = {
         "version": "2.0",
@@ -70,31 +81,31 @@ def celery_analysis_picture(secure_urls_str, callback_url, plusfriend_user_key, 
                         "itemList": [
                             {
                                 "title": "칼로리",
-                                "description": "900kcal"
+                                "description": f"{calorie}kcal"
                             },
                             {
                                 "title": "단백질",
-                                "description": "20g"
+                                "description": f"{protein}g"
                             },
                             {
                                 "title": "탄수화물",
-                                "description": "50g"
+                                "description": f"{carbohydrate}g"
                             },
                             {
                                 "title": "지방",
-                                "description": "포화지방: 10g\n트랜스지방: 0g"
+                                "description": f"포화지방: {fat1}g\n트랜스지방: {fat2}g"
                             },
                             {
                                 "title": ".",
-                                "description": "불포화지방: 10g"
+                                "description": f"불포화지방: {fat3}g"
                             },
                             {
                                 "title": "콜레스테롤",
-                                "description": "121mg"
+                                "description": f"{cholesterol}mg"
                             },
                             {
                                 "title": "나트륨",
-                                "description": "1924mg"
+                                "description": f"{sodium}mg"
                             }
                         ],
                         "itemListAlignment": "right",
@@ -104,7 +115,7 @@ def celery_analysis_picture(secure_urls_str, callback_url, plusfriend_user_key, 
                 {
                     "textCard": {
                         "title": "제공한 데이터가 올바른가요?",
-                        "description": '수정이 필요하다면 말씀해주세요.',
+                        "description": '',
                         "buttons": [
                             {
                                 "action": "message",
@@ -113,12 +124,15 @@ def celery_analysis_picture(secure_urls_str, callback_url, plusfriend_user_key, 
                                 "extra": {
                                     "plusfriend_user_key": plusfriend_user_key,
                                     "meal_time": meal_time_value,
-                                    "calorie": "900",
-                                    "protein": "20",
-                                    "carbohydrate": "50",
-                                    "fat": "10",
-                                    "cholesterol": "121",
-                                    "sodium": "1924"
+                                    "food_name": ko_res,
+                                    "calorie": calorie,
+                                    "protein": protein,
+                                    "carbohydrate": carbohydrate,
+                                    "fat1": fat1,
+                                    "fat2": fat2,
+                                    "fat3": fat3,
+                                    "cholesterol": cholesterol,
+                                    "sodium": sodium
                                 }
                             },
                             {
