@@ -23,6 +23,7 @@ urlpatterns = [
     path("", include('main.urls')),
     path("analysis/", include('analysis.urls')),
     path("member/", include('member.urls')),
+    path("record/", include('record.urls')),
 ]
 
 # 개발 환경에서 정적 파일 서빙을 위한 코드

@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     "main",
     "analysis",
     "member",
+    "record",
     # celery setting
     'django_celery_beat',
     'django_celery_results',

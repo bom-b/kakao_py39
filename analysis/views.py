@@ -45,6 +45,9 @@ def analysis_picture(request):
     plusfriend_user_key = load_json.get('userRequest', {}).get('user', {}).get('properties', {}).get(
         'plusfriend_user_key')
 
+    # "meal_time" 값을 추출
+    meal_time_value = load_json['action']['clientExtra']['meal_time']
+
     try:
         member = Members.objects.get(kakaotalk_cord=plusfriend_user_key)
         member_nickname = str(member.nickname)
@@ -59,7 +62,7 @@ def analysis_picture(request):
         msg = f"데이터를 저장 하시려면 회원가입을 해주세요.\n\n사진을 분석하는 동안 잠시 기다려 주세요!"
 
     # 비동기처리 - 사진분석 함수 호출
-    celery_analysis_picture.apply_async(args=(secure_urls_str, callback_url,))
+    celery_analysis_picture.apply_async(args=(secure_urls_str, callback_url, plusfriend_user_key, meal_time_value))
 
     return JsonResponse({
         "version": "2.0",
@@ -167,7 +170,7 @@ def recommend_menu(request):
                                 "title": "",
                                 "description": "",
                                 "thumbnail": {
-                                    "imageUrl": "https://www.chuksannews.co.kr/data/photos/20210414/art_16177684990221_d040c6.jpg",
+                                    "imageUrl": "https://mblogthumb-phinf.pstatic.net/MjAxODAyMjRfMjk0/MDAxNTE5NDQwMTg1OTU2.JKq0-d5KiA2gjilMpNrxuPZ86HHtgnlge_aroIMq3jog.N9lBjy-ORkGnLNnHtozpPccDaw0Q_56afp2VLUJewegg.JPEG.valueyey/%EC%95%84%EC%B9%A8%EC%8B%9D%ED%83%81.JPG?type=w800",
                                     "width": 800,
                                     "height": 800
                                 },
@@ -216,7 +219,7 @@ def recommend_menu(request):
                                 "title": "",
                                 "description": "",
                                 "thumbnail": {
-                                    "imageUrl": "https://www.chuksannews.co.kr/data/photos/20210414/art_16177684990221_d040c6.jpg",
+                                    "imageUrl": "https://i.namu.wiki/i/0NPS6g2Cxk8YDk-W9yRJrBMX-pgsItemO1f2qckU3CkBGmFicbTIQ9hP67XeEDpqIA9ec7ceGgiBVL86BcQmx2knVRobflKV1V_uZQDF31vGwCMo2Crd-rj9yXL-1xYvFuNPTGHIelmxXKtVsnfdEg.webp",
                                     "width": 800,
                                     "height": 800
                                 },
@@ -265,7 +268,7 @@ def recommend_menu(request):
                                 "title": "",
                                 "description": "",
                                 "thumbnail": {
-                                    "imageUrl": "https://www.chuksannews.co.kr/data/photos/20210414/art_16177684990221_d040c6.jpg",
+                                    "imageUrl": "https://mblogthumb-phinf.pstatic.net/MjAxODAyMTBfMjkg/MDAxNTE4MTkzMjEyNDM0.3Ue2J07GN7V06QsXCClc8gl_v6PZgOI_7W8twpr5OVYg.PUR96dsqG0gEQMtAUhlSRmXnMr0PuEwyB97WN-wbkSYg.JPEG.hnojkm/image_8899831471518193179987.jpg?type=w800",
                                     "width": 800,
                                     "height": 800
                                 },

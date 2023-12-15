@@ -8,15 +8,17 @@ from celery import Celery
 from kakao_py39.celery import app
 from googletrans import Translator
 from analysis.models import MyResNet50Model
+from member.models import Members
 
 UPLOAD_DIR = 'media/analysis/'
 
 app = Celery('tasks', broker='redis://127.0.0.1:6379')
+
+
 # analysis > tasks.py 파일임.
 @app.task
 # @csrf_exempt
-def celery_analysis_picture(secure_urls_str, callback_url):
-
+def celery_analysis_picture(secure_urls_str, callback_url, plusfriend_user_key, meal_time_value):
     now = datetime.now()
     # datetime 객체를 초로 변환합니다.
     timestamp = str(int(now.timestamp()))
@@ -58,9 +60,12 @@ def celery_analysis_picture(secure_urls_str, callback_url):
                         "title": "",
                         "description": "",
                         "thumbnail": {
-                            "imageUrl": "secure_urls_str,",
+                            "imageUrl": secure_urls_str,
                             "width": 800,
                             "height": 800
+                        },
+                        "profile": {
+                            "title": f"{meal_time_value}식단 분석"
                         },
                         "itemList": [
                             {
@@ -77,7 +82,11 @@ def celery_analysis_picture(secure_urls_str, callback_url):
                             },
                             {
                                 "title": "지방",
-                                "description": "포화지방: 10g\n트랜스지방: 0g\n불포화지방: 10g"
+                                "description": "포화지방: 10g\n트랜스지방: 0g"
+                            },
+                            {
+                                "title": "",
+                                "description": "불포화지방: 10g"
                             },
                             {
                                 "title": "콜레스테롤",
@@ -100,13 +109,31 @@ def celery_analysis_picture(secure_urls_str, callback_url):
                             {
                                 "action": "message",
                                 "label": "이대로 기록하기",
-                                "messageText": "식단 기록하기"
+                                "messageText": "식단 기록하기",
+                                "extra": {
+                                    "plusfriend_user_key": plusfriend_user_key,
+                                    "meal_time": meal_time_value,
+                                    "calorie": "900",
+                                    "protein": "20",
+                                    "carbohydrate": "50",
+                                    "fat": "10",
+                                    "cholesterol": "121",
+                                    "sodium": "1924"
+                                }
                             },
                             {
                                 "action": "message",
                                 "label": "사진 다시 올리기",
                                 "messageText": "식단 등록"
                             },
+                        ]
+                    }
+                },
+                {
+                    "textCard": {
+                        "title": "",
+                        "description": '',
+                        "buttons": [
                             {
                                 "action": "message",
                                 "label": "사진 다시 분석하기",
@@ -129,7 +156,6 @@ def celery_analysis_picture(secure_urls_str, callback_url):
         }
     }
 
-    print('유알엘로 다시 보내기')
     # POST 요청 보내기
     headers = {'Content-Type': 'application/json'}
     response = requests.post(callback_url, data=json.dumps(response_data), headers=headers)
