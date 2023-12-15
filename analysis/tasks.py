@@ -85,7 +85,7 @@ def celery_analysis_picture(secure_urls_str, callback_url, plusfriend_user_key, 
                                 "description": "포화지방: 10g\n트랜스지방: 0g"
                             },
                             {
-                                "title": " ",
+                                "title": ".",
                                 "description": "불포화지방: 10g"
                             },
                             {
@@ -131,8 +131,8 @@ def celery_analysis_picture(secure_urls_str, callback_url, plusfriend_user_key, 
                 },
                 {
                     "textCard": {
-                        "title": " ",
-                        "description": ' ',
+                        "title": "",
+                        "description": '수정이 필요하다면 말씀해주세요.',
                         "buttons": [
                             {
                                 "action": "message",
