@@ -159,6 +159,7 @@ def recommend_menu(request):
                                         "messageText": "고마워"
                                     }
                                 ],
+                                "itemListAlignment": "right",
                                 "buttonLayout": "vertical"
                             },
 
@@ -207,6 +208,7 @@ def recommend_menu(request):
                                         "messageText": "고마워"
                                     }
                                 ],
+                                "itemListAlignment": "right",
                                 "buttonLayout": "vertical"
 
                             },
@@ -256,6 +258,7 @@ def recommend_menu(request):
                                         "messageText": "고마워"
                                     }
                                 ],
+                                "itemListAlignment": "right",
                                 "buttonLayout": "vertical"
 
                             },
@@ -305,6 +308,7 @@ def recommend_menu(request):
                                         "messageText": "고마워"
                                     }
                                 ],
+                                "itemListAlignment": "right",
                                 "buttonLayout": "vertical"
 
                             }
