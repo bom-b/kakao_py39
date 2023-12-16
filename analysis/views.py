@@ -106,7 +106,17 @@ def recommend_menu(request):
             "outputs": [
                 {
                     "simpleText": {
-                        "text": f"{member_nickname}님, 저녁 식단을 추천해드리겠습니다."
+                        "text": "저녁 식단을 추천해드릴게요!"
+                    }
+                },
+                {
+                    "simpleText": {
+                        "text": f"{member_nickname}님의 하루 식단을 분석한 결과" +
+                        "하루 권장 섭취량 기준, \n\n" +
+                        "칼로리가 35% 부족,\n" +
+                        "단백질이 20% 부족,\n" +
+                        "나트륨이 10% 과섭취\n" +
+                        "하신 상태십니다."
                     }
                 },
                 {

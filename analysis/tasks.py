@@ -80,6 +80,14 @@ def celery_analysis_picture(secure_urls_str, callback_url, plusfriend_user_key, 
                         },
                         "itemList": [
                             {
+                                "title": "기준",
+                                "description": "200g당"
+                            },
+                            {
+                                "title": ".",
+                                "description": "."
+                            },
+                            {
                                 "title": "칼로리",
                                 "description": f"{calorie}kcal"
                             },
@@ -93,7 +101,11 @@ def celery_analysis_picture(secure_urls_str, callback_url, plusfriend_user_key, 
                             },
                             {
                                 "title": "지방",
-                                "description": f"포화지방: {fat1}g\n트랜스지방: {fat2}g"
+                                "description": f"포화지방: {fat1}g"
+                            },
+                            {
+                                "title": ".",
+                                "description": f"트랜스지방: {fat2}g"
                             },
                             {
                                 "title": ".",
